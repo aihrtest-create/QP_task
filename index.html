@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор Ачивок "Квест Портал"</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .step-card {
+            background-color: #f8fafc; /* slate-50 */
+            border: 1px solid #e2e8f0; /* slate-200 */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-title {
+            color: #1e293b; /* slate-800 */
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-6xl mx-auto">
+        <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Генератор Ачивок</h1>
+                <p class="text-slate-500 mt-2">для мобильного приложения "Квест Портал"</p>
+            </div>
+
+            <!-- Шаг 1: Выбор Игр и Языка -->
+            <div class="step-card">
+                <h2 class="step-title">Шаг 1: Выберите игры и язык</h2>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <div class="md:col-span-4">
+                        <label class="block text-sm font-medium text-slate-600 mb-2">Игры для генерации:</label>
+                        <div id="gamesList" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-h-60 overflow-y-auto p-4 bg-white rounded-md border">
+                            <!-- Checkboxes will be populated by JS -->
+                        </div>
+                    </div>
+                    <div class="md:col-span-1">
+                        <label for="language" class="block text-sm font-medium text-slate-600 mb-2">Язык описаний:</label>
+                        <select id="language" class="w-full px-4 py-2 bg-white rounded-md border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                            <option value="ru">Русский</option>
+                            <option value="es">Испанский</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Шаг 2: Настройка Наград -->
+            <div class="step-card">
+                <h2 class="step-title">Шаг 2: Настройте награды</h2>
+                
+                <!-- Global Reward Settings -->
+                <div class="mb-6 p-4 bg-slate-100/80 border border-slate-200 rounded-lg">
+                    <h3 class="font-semibold text-slate-700 mb-2">Общие настройки для всех</h3>
+                    <p class="text-sm text-slate-500 mb-3">Измените значения здесь, чтобы применить их ко всем выбранным играм ниже.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-4">
+                        <!-- Simple Rewards -->
+                        <div class="p-3 bg-white rounded-md border">
+                            <h4 class="font-medium text-sm text-slate-600 mb-2">Простая (Simple)</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label for="global_hp_simple" class="block text-xs font-medium text-slate-500">Reward HP</label>
+                                    <input type="number" id="global_hp_simple" value="350" class="w-full mt-1 px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                                </div>
+                                <div>
+                                    <label for="global_exp_simple" class="block text-xs font-medium text-slate-500">Reward EXP</label>
+                                    <input type="number" id="global_exp_simple" value="300" class="w-full mt-1 px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Medium Rewards -->
+                        <div class="p-3 bg-white rounded-md border">
+                            <h4 class="font-medium text-sm text-slate-600 mb-2">Средняя (Medium)</h4>
+                             <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label for="global_hp_medium" class="block text-xs font-medium text-slate-500">Reward HP</label>
+                                    <input type="number" id="global_hp_medium" value="600" class="w-full mt-1 px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                                </div>
+                                <div>
+                                    <label for="global_exp_medium" class="block text-xs font-medium text-slate-500">Reward EXP</label>
+                                    <input type="number" id="global_exp_medium" value="550" class="w-full mt-1 px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hard Rewards -->
+                        <div class="p-3 bg-white rounded-md border">
+                            <h4 class="font-medium text-sm text-slate-600 mb-2">Сложная (Hard)</h4>
+                             <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label for="global_hp_hard" class="block text-xs font-medium text-slate-500">Reward HP</label>
+                                    <input type="number" id="global_hp_hard" value="900" class="w-full mt-1 px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                                </div>
+                                <div>
+                                    <label for="global_exp_hard" class="block text-xs font-medium text-slate-500">Reward EXP</label>
+                                    <input type="number" id="global_exp_hard" value="900" class="w-full mt-1 px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="rewardsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p id="rewardsPlaceholder" class="text-slate-500 col-span-full">Выберите хотя бы одну игру, чтобы настроить награды.</p>
+                    <!-- Reward settings will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Шаг 3: Генерация -->
+            <div class="text-center my-8">
+                <button id="generateTableBtn" class="bg-sky-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transform hover:scale-105 transition-transform duration-200 shadow-lg">
+                    Сгенерировать Таблицу
+                </button>
+            </div>
+
+            <!-- Шаг 4: Результат -->
+            <div id="resultWrapper" class="hidden">
+                <div class="flex justify-between items-center mb-2 flex-wrap gap-4">
+                    <h2 class="text-2xl font-semibold text-slate-800">Результат</h2>
+                    <div class="flex items-center gap-3">
+                        <button id="copyBtn" class="bg-sky-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 flex items-center gap-2 transition-colors duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                            Копировать для Sheets
+                        </button>
+                        <button id="exportBtn" class="bg-emerald-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 S001-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L6.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                            Экспорт в CSV
+                        </button>
+                    </div>
+                </div>
+                 <p class="text-center md:text-right text-sm text-slate-500 mb-4">Для Google Sheets: нажмите "Копировать", затем вставьте (Ctrl+V) в пустую ячейку.</p>
+                <div class="overflow-x-auto bg-white rounded-lg border border-slate-200 max-h-[50vh]">
+                    <table id="dataTable" class="w-full min-w-[1200px] text-sm text-left text-slate-600">
+                        <!-- Table content will be generated here -->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+// --- DATABASE with Spanish translations ---
+const achievementData = {
+    'hp-kidalki': {
+        title: 'Кидалки', title_es: 'Ballstrike',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Ballstrike' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Ballstrike' }, 'GameAction': { desc_ru: 'Сбей 30 врагов', desc_es: 'Derriba a 30 enemigos', progress: 30 } }, 
+            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Ballstrike' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Ballstrike' }, 'GameAction': { desc_ru: 'Сбей 30 животных', desc_es: 'Derriba a 30 animales', progress: 30 } }, 
+            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Ballstrike' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Ballstrike' }, 'GameAction': { desc_ru: 'Уничтожь 30 летающих тарелок', desc_es: 'Destruir 30 ovnis', progress: 30 } }, 
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Ballstrike' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Ballstrike' }, 'GameAction': { desc_ru: 'Сбей 30 рыб', desc_es: 'Derriba a 30 peces', progress: 30 } }, 
+            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Ballstrike' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Ballstrike' }, 'GameAction': { desc_ru: 'Сбей 30 обезьян', desc_es: 'Derriba a 30 monos', progress: 30 } }, 
+            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Ballstrike' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Ballstrike' }, 'GameAction': { desc_ru: 'Уничтожь 20 Баггов', desc_es: 'Destruye 20 Buggs', progress: 20 } } 
+        }
+    },
+    'hp-bubble-mubble': {
+        title: 'Бабл Мабл', title_es: 'Bubble-Mubble',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar a Bubble-Mabble' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Bubble-Mabble' }, 'GameAction': { desc_ru: 'Собери 25 звезд', desc_es: 'Recoge 25 estrellas', progress: 25 } }, 
+            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar a Bubble-Mabble' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Bubble-Mabble' }, 'GameAction': { desc_ru: 'Собери 25 бабочек', desc_es: 'Recoge 25 mariposas', progress: 25 } }, 
+            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar a Bubble-Mabble' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Bubble-Mabble' }, 'GameAction': { desc_ru: 'Собери 25 конфет', desc_es: 'Recoge 25 caramelos', progress: 25 } }, 
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar a Bubble-Mabble' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Bubble-Mabble' }, 'GameAction': { desc_ru: 'Собери 25 жемчужин', desc_es: 'Recoge 25 perlas', progress: 25 } }, 
+            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar a Bubble-Mabble' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Bubble-Mabble' }, 'GameAction': { desc_ru: 'Собери 25 единиц мусора', desc_es: 'Recoge 25 unidades de basura', progress: 25 } }, 
+            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar a Bubble-Mabble' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana un juego de Bubble-Mabble' }, 'GameAction': { desc_ru: 'Собери 25 монет', desc_es: 'Recoge 25 monedas', progress: 25 } } 
+        }
+    },
+     'hp-boxgame': {
+        title: 'Кубики', title_es: 'Cubos Interactivos',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega con Cubos Interactivos' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Cubos Interactivos' }, 'GameAction': { desc_ru: 'Собери 15 спутников', desc_es: 'Reúne 15 satélites', progress: 15 } }, 
+            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega con Cubos Interactivos' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Cubos Interactivos' }, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Reúne 15 figuras correctas', progress: 15 } }, 
+            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega con Cubos Interactivos' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Cubos Interactivos' }, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Reúne 15 figuras correctas', progress: 15 } }, 
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega con Cubos Interactivos' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Cubos Interactivos' }, 'GameAction': { desc_ru: 'Собери 15 ракушек', desc_es: 'Recoge 15 conchas', progress: 15 } }, 
+            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega con Cubos Interactivos' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Cubos Interactivos' }, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Reúne 15 figuras correctas', progress: 15 } }, 
+            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega con Cubos Interactivos' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Cubos Interactivos' }, 'GameAction': { desc_ru: 'Собери 18 фигур', desc_es: 'Reúne 18 figuras', progress: 18 } } 
+        }
+    },
+    'hp-flashlights': {
+        title: 'Фонари', title_es: 'Linternas',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Linternas de juguete' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Linternas' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
+            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Linternas de juguete' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Linternas' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
+            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Linternas de juguete' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Linternas' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Linternas de juguete' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Linternas' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
+            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Linternas de juguete' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Linternas' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
+            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Linternas de juguete' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana en Linternas' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } } 
+        }
+    },
+    'hp-living-figures': {
+        title: 'Ожившие фигуры', title_es: 'Figuras Vivientes',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 15 фигур', progress: 15 } }, 
+            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 15 фигур', progress: 15 } }, 
+            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 15 фигур', progress: 15 } }, 
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 15 фигур', progress: 15 } }, 
+            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 15 фигур', progress: 15 } }, 
+            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 15 фигур', progress: 15 } } 
+        }
+    },
+    'hp-living-pictures': {
+        title: 'Ожившие рисунки', title_es: 'Living Pictures',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Living Pictures' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Ganar en Living Pictures' }, 'GameAction': { desc_ru: 'Отправь 15 рисунков', desc_es: 'Envía 15 dibujos', progress: 15 } }, 
+            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Living Pictures' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Ganar en Living Pictures' }, 'GameAction': { desc_ru: 'Создай 15 животных', desc_es: 'Crea 15 animales', progress: 15 } }, 
+            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Living Pictures' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Ganar en Living Pictures' }, 'GameAction': { desc_ru: 'Создай 15 игрушек', desc_es: 'Crea 15 juguetes', progress: 15 } }, 
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Living Pictures' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Ganar en Living Pictures' }, 'GameAction': { desc_ru: 'Создай 15 морских обитателей', desc_es: 'Crea 15 habitantes del mar', progress: 15 } }, 
+            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Living Pictures' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Ganar en Living Pictures' }, 'GameAction': { desc_ru: 'Создай 15 объектов', desc_es: 'Crea 15 objetos', progress: 15 } }, 
+            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Jugar Living Pictures' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Ganar en Living Pictures' }, 'GameAction': { desc_ru: 'Создай 15 фигур', desc_es: 'Crea 15 figuras', progress: 15 } } 
+        }
+    },
+    'hp-painter': {
+        title: 'Художник', title_es: 'Artista',
+        achievements: { 
+            'Space2.0':   { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Нарисуй 5 ракет', progress: 5 } }, 
+            'Animals':    { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Нарисуй 5 животных', progress: 5 } }, 
+            'Toys':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Нарисуй 5 игрушек', progress: 5 } }, 
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Нарисуй 5 рыб', progress: 5 } }, 
+            'City':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Нарисуй 5 машин', progress: 5 } }, 
+            'Voxels':     { 'TimeSpent': { desc_ru: '[Заглушка] Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: '[Заглушка] Выиграй игру' }, 'GameAction': { desc_ru: '[Заглушка] Нарисуй 5 объектов', progress: 5 } } 
+        }
+    },
+    'hp-magnets': {
+        title: 'Магниты', title_es: 'Imanes',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 15 спутников', progress: 15 } },
+            'Voxels':   { 'TimeSpent': { desc_ru: '[Заглушка] Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: '[Заглушка] Выиграй игру' }, 'GameAction': { desc_ru: '[Заглушка] Собери 15 фигур', progress: 15 } }
+        }
+    },
+    'hp-trampoline': {
+        title: 'Батут', title_es: 'Trampolín',
+        achievements: { 
+            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 30 звезд', progress: 30 } },
+            'Animals':  { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 30 бабочек', progress: 30 } },
+            'Voxels':   { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameWin': { desc_ru: 'Выиграй игру' }, 'GameAction': { desc_ru: 'Собери 30 предметов', progress: 30 } }
+        }
+    },
+    'hp-climbwall': {
+        title: 'Скалодром', title_es: 'Muro de Escalada',
+        achievements: { 
+            'Space2.0':   { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameAction': { desc_ru: 'Собери 25 звезд', progress: 25 } },
+            'Animals':    { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameAction': { desc_ru: 'Собери 25 бабочек', progress: 25 } },
+            'Toys':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameAction': { desc_ru: 'Собери 25 игрушек', progress: 25 } },
+            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameAction': { desc_ru: 'Собери 25 рыб', progress: 25 } },
+            'City':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameAction': { desc_ru: 'Собери 25 машин', progress: 25 } },
+            'Voxels':     { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту' }, 'GameAction': { desc_ru: 'Собери 25 предметов', progress: 25 } }
+        }
+    }
+};
+
+// --- CONSTANTS ---
+const THEMES = ['Space2.0', 'Animals', 'Toys', 'Underwater', 'City', 'Voxels'];
+const EVENT_TYPE_MAP = {
+    'TimeSpent': 'simple',
+    'GameWin': 'medium',
+    'GameAction': 'hard'
+};
+
+let generatedData = []; // To store the results for export
+
+// --- DOM ELEMENTS ---
+const gamesListContainer = document.getElementById('gamesList');
+const rewardsContainer = document.getElementById('rewardsContainer');
+const rewardsPlaceholder = document.getElementById('rewardsPlaceholder');
+const languageSelect = document.getElementById('language');
+const generateBtn = document.getElementById('generateTableBtn');
+const resultWrapper = document.getElementById('resultWrapper');
+const dataTable = document.getElementById('dataTable');
+const copyBtn = document.getElementById('copyBtn');
+const exportBtn = document.getElementById('exportBtn');
+const globalInputs = {
+    hp: {
+        simple: document.getElementById('global_hp_simple'),
+        medium: document.getElementById('global_hp_medium'),
+        hard: document.getElementById('global_hp_hard')
+    },
+    exp: {
+        simple: document.getElementById('global_exp_simple'),
+        medium: document.getElementById('global_exp_medium'),
+        hard: document.getElementById('global_exp_hard')
+    }
+};
+
+
+// --- FUNCTIONS ---
+
+/**
+ * Populate the list of games with checkboxes
+ */
+function populateGamesList() {
+    gamesListContainer.innerHTML = ''; // Clear the list before populating
+    const sortedGames = Object.entries(achievementData).sort(([,a],[,b]) => {
+        return a.title.localeCompare(b.title);
+    });
+
+    for (const [zone_name, game] of sortedGames) {
+        const div = document.createElement('div');
+        div.className = 'flex items-center';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = zone_name;
+        checkbox.value = zone_name;
+        checkbox.checked = true; // Set checkbox to be checked by default
+        checkbox.className = 'h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500';
+        
+        const label = document.createElement('label');
+        label.htmlFor = zone_name;
+        label.textContent = game.title; // ALWAYS show Russian title for consistency
+        label.className = 'ml-2 block text-sm text-gray-900';
+        
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        gamesListContainer.appendChild(div);
+    }
+}
+
+/**
+ * Show/hide reward settings based on checked games
+ */
+function updateRewardSettings() {
+    const checkedGames = gamesListContainer.querySelectorAll('input[type="checkbox"]:checked');
+    
+    rewardsContainer.innerHTML = '';
+    
+    if (checkedGames.length === 0) {
+        rewardsContainer.appendChild(rewardsPlaceholder);
+    } else {
+        checkedGames.forEach(checkbox => {
+            const zone_name = checkbox.value;
+            const game = achievementData[zone_name];
+            
+            const card = document.createElement('div');
+            card.className = 'p-4 bg-white border rounded-lg shadow-sm';
+            card.dataset.game = zone_name;
+
+            const title = document.createElement('h3');
+            title.className = 'font-semibold text-slate-700 mb-3';
+            title.textContent = game.title; // ALWAYS show Russian title for consistency
+            card.appendChild(title);
+
+            const grid = document.createElement('div');
+            grid.className = 'space-y-3';
+
+            grid.innerHTML += `
+                <!-- Simple -->
+                <div class="p-2 bg-slate-50 rounded-md">
+                    <h4 class="font-medium text-xs text-slate-500 mb-1">Простая</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="hp_simple_${zone_name}" class="block text-xs font-medium text-slate-400">HP</label>
+                            <input type="number" id="hp_simple_${zone_name}" value="${globalInputs.hp.simple.value}" class="w-full px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                        </div>
+                        <div>
+                            <label for="exp_simple_${zone_name}" class="block text-xs font-medium text-slate-400">EXP</label>
+                            <input type="number" id="exp_simple_${zone_name}" value="${globalInputs.exp.simple.value}" class="w-full px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+                <!-- Medium -->
+                 <div class="p-2 bg-slate-50 rounded-md">
+                    <h4 class="font-medium text-xs text-slate-500 mb-1">Средняя</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="hp_medium_${zone_name}" class="block text-xs font-medium text-slate-400">HP</label>
+                            <input type="number" id="hp_medium_${zone_name}" value="${globalInputs.hp.medium.value}" class="w-full px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                        </div>
+                        <div>
+                            <label for="exp_medium_${zone_name}" class="block text-xs font-medium text-slate-400">EXP</label>
+                            <input type="number" id="exp_medium_${zone_name}" value="${globalInputs.exp.medium.value}" class="w-full px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+                <!-- Hard -->
+                <div class="p-2 bg-slate-50 rounded-md">
+                    <h4 class="font-medium text-xs text-slate-500 mb-1">Сложная</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label for="hp_hard_${zone_name}" class="block text-xs font-medium text-slate-400">HP</label>
+                            <input type="number" id="hp_hard_${zone_name}" value="${globalInputs.hp.hard.value}" class="w-full px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                        </div>
+                        <div>
+                            <label for="exp_hard_${zone_name}" class="block text-xs font-medium text-slate-400">EXP</label>
+                            <input type="number" id="exp_hard_${zone_name}" value="${globalInputs.exp.hard.value}" class="w-full px-2 py-1 bg-white rounded-md border border-slate-300 text-sm focus:ring-1 focus:ring-sky-500 focus:border-sky-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            card.appendChild(grid);
+            rewardsContainer.appendChild(card);
+        });
+    }
+}
+
+/**
+ * Main function to generate the achievement table data
+ */
+function generateTable() {
+    const selectedLang = languageSelect.value;
+    const checkedGames = gamesListContainer.querySelectorAll('input[type="checkbox"]:checked');
+    
+    generatedData = []; // Reset previous data
+
+    if (checkedGames.length === 0) {
+        alert('Пожалуйста, выберите хотя бы одну игру.');
+        resultWrapper.classList.add('hidden'); // Hide results if no games are selected
+        return;
+    }
+
+    checkedGames.forEach(checkbox => {
+        const zone_name = checkbox.value;
+        const gameData = achievementData[zone_name];
+        
+        const gameRewards = {
+            hp: {
+                simple: document.getElementById(`hp_simple_${zone_name}`).value,
+                medium: document.getElementById(`hp_medium_${zone_name}`).value,
+                hard: document.getElementById(`hp_hard_${zone_name}`).value
+            },
+            exp: {
+                simple: document.getElementById(`exp_simple_${zone_name}`).value,
+                medium: document.getElementById(`exp_medium_${zone_name}`).value,
+                hard: document.getElementById(`exp_hard_${zone_name}`).value
+            }
+        };
+
+        const gameThemes = Object.keys(gameData.achievements);
+
+        gameThemes.forEach(theme => {
+            for (const event_type in EVENT_TYPE_MAP) {
+                const achievementThemeData = gameData.achievements[theme];
+                if (!achievementThemeData || !achievementThemeData[event_type]) {
+                    continue; // Skip if this event_type (e.g., GameWin) doesn't exist for this game/theme
+                }
+
+                const category = EVENT_TYPE_MAP[event_type];
+                const achievementDetails = achievementThemeData[event_type];
+                
+                let title = gameData.title;
+                let desc = achievementDetails.desc_ru;
+                
+                if (selectedLang === 'es') {
+                    title = gameData.title_es || gameData.title;
+                    desc = achievementDetails.desc_es || achievementDetails.desc_ru;
+                }
+                
+                desc = desc || 'Описание не найдено';
+
+                let required_progress = 1;
+                if (event_type === 'GameAction') {
+                    required_progress = achievementDetails.progress || 1;
+                }
+
+                const row = {
+                    name: `${event_type}_${zone_name}_${theme}`,
+                    desc: desc,
+                    zone_name: zone_name,
+                    title: title,
+                    theme: theme,
+                    category: category,
+                    required_progress: required_progress,
+                    event_type: event_type,
+                    reward_hp: gameRewards.hp[category],
+                    reward_exp: gameRewards.exp[category]
+                };
+                generatedData.push(row);
+            }
+        });
+    });
+
+    renderTable(generatedData);
+    resultWrapper.classList.remove('hidden');
+}
+
+
+/**
+ * Render the generated data into the HTML table
+ * @param {Array<Object>} data 
+ */
+function renderTable(data) {
+    const headers = ['name', 'desc', 'zone_name', 'title', 'theme', 'category', 'required_progress', 'event_type', 'reward_hp', 'reward_exp'];
+    
+    let tableHTML = '<thead class="text-xs text-slate-700 uppercase bg-slate-100">';
+    tableHTML += '<tr>';
+    headers.forEach(h => tableHTML += `<th scope="col" class="px-6 py-3">${h}</th>`);
+    tableHTML += '</tr></thead>';
+    
+    tableHTML += '<tbody>';
+    data.forEach(row => {
+        tableHTML += '<tr class="bg-white border-b hover:bg-slate-50">';
+        headers.forEach(h => {
+            tableHTML += `<td class="px-6 py-4">${row[h]}</td>`;
+        });
+        tableHTML += '</tr>';
+    });
+    tableHTML += '</tbody>';
+    
+    dataTable.innerHTML = tableHTML;
+}
+
+/**
+ * Convert data to Tab-Separated Values (TSV) and copy to clipboard.
+ * This format is perfect for pasting directly into Google Sheets.
+ */
+function copyForSheets() {
+    if (generatedData.length === 0) {
+        alert('Нет данных для копирования. Сначала сгенерируйте таблицу.');
+        return;
+    }
+
+    const headers = Object.keys(generatedData[0]);
+    const tsvRows = [headers.join('\t')]; // Header row with tabs
+
+    generatedData.forEach(row => {
+        const values = headers.map(header => {
+            return ('' + row[header]).replace(/\n/g, " ").replace(/\t/g, " ");
+        });
+        tsvRows.push(values.join('\t'));
+    });
+
+    const tsvString = tsvRows.join('\n');
+
+    const textArea = document.createElement('textarea');
+    textArea.value = tsvString;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        const originalHTML = copyBtn.innerHTML;
+        copyBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+            Скопировано!`;
+        setTimeout(() => { copyBtn.innerHTML = originalHTML; }, 2000);
+    } catch (err) {
+        console.error('Не удалось скопировать текст: ', err);
+        alert('Ошибка при копировании.');
+    }
+    document.body.removeChild(textArea);
+}
+
+/**
+ * Convert data to CSV format and trigger download
+ */
+function exportToCSV() {
+    if (generatedData.length === 0) {
+        alert('Нет данных для экспорта. Сначала сгенерируйте таблицу.');
+        return;
+    }
+
+    const headers = Object.keys(generatedData[0]);
+    const csvRows = [headers.join(',')]; // Header row
+
+    generatedData.forEach(row => {
+        const values = headers.map(header => {
+            const escaped = ('' + row[header]).replace(/"/g, '""'); // Escape double quotes
+            return `"${escaped}"`; // Wrap all fields in quotes
+        });
+        csvRows.push(values.join(','));
+    });
+
+    const csvString = csvRows.join('\n');
+    const blob = new Blob(['\uFEFF' + csvString], { type: 'text/csv;charset=utf-8;' }); // Add BOM for Excel
+    
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'achievements.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+/**
+ * Applies the global reward values to all individual game reward inputs.
+ */
+function applyGlobalRewards(event) {
+    const sourceId = event.target.id; // e.g., "global_hp_simple"
+    const value = event.target.value;
+
+    const parts = sourceId.split('_');
+    const rewardType = parts[1]; // "hp" or "exp"
+    const category = parts[2]; // "simple", "medium", "hard"
+
+    const allInputs = rewardsContainer.querySelectorAll(`input[id^="${rewardType}_${category}_"]`);
+    allInputs.forEach(input => input.value = value);
+}
+
+
+// --- EVENT LISTENERS ---
+document.addEventListener('DOMContentLoaded', () => {
+    populateGamesList();
+    updateRewardSettings(); // Call this to populate rewards for default checked boxes
+});
+gamesListContainer.addEventListener('change', updateRewardSettings);
+generateBtn.addEventListener('click', generateTable);
+copyBtn.addEventListener('click', copyForSheets);
+exportBtn.addEventListener('click', exportToCSV);
+
+// Add listeners for all global inputs
+Object.values(globalInputs.hp).forEach(input => input.addEventListener('input', applyGlobalRewards));
+Object.values(globalInputs.exp).forEach(input => input.addEventListener('input', applyGlobalRewards));
+
+</script>
+</body>
+</html>
+
