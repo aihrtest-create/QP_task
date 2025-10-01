@@ -50,6 +50,7 @@
                         <label for="language" class="block text-sm font-medium text-slate-600 mb-2">Язык описаний:</label>
                         <select id="language" class="w-full px-4 py-2 bg-white rounded-md border border-slate-300 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none">
                             <option value="ru">Русский</option>
+                            <option value="en">Английский</option>
                             <option value="es">Испанский</option>
                         </select>
                     </div>
@@ -151,115 +152,134 @@
     </div>
 
 <script>
-// --- DATABASE with Spanish translations ---
+// --- DATABASE with all translations ---
 const achievementData = {
     'hp-kidalki': {
         title: 'Кидалки',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Сбей 30 врагов', desc_es: 'Derriba a 30 enemigos', progress: 30 } }, 
-            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Сбей 30 животных', desc_es: 'Derriba a 30 animales', progress: 30 } }, 
-            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Уничтожь 30 летающих тарелок', desc_es: 'Destruye 30 platillos voladores', progress: 30 } }, 
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Сбей 30 рыб', desc_es: 'Derriba a 30 peces', progress: 30 } }, 
-            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Сбей 30 обезьян', desc_es: 'Derriba a 30 monos', progress: 30 } }, 
-            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Уничтожь 20 Баггов', desc_es: 'Destruye 20 Buggs', progress: 20 } } 
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Сбей 30 врагов', desc_es: 'Derriba a 30 enemigos', desc_en: 'Kill 30 enemies', progress: 30 } }, 
+            'Animals': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Сбей 30 животных', desc_es: 'Derriba a 30 animales', desc_en: 'Knock down 30 animals', progress: 30 } }, 
+            'Toys': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Уничтожь 30 летающих тарелок', desc_es: 'Destruye 30 platillos voladores', desc_en: 'Destroy 30 flying saucers', progress: 30 } }, 
+            'Underwater': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Сбей 30 рыб', desc_es: 'Derriba a 30 peces', desc_en: 'Knock down 30 fish', progress: 30 } }, 
+            'City': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Сбей 30 обезьян', desc_es: 'Derriba a 30 monos', desc_en: 'Knock down 30 monkeys', progress: 30 } }, 
+            'Voxels': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Закидай 30 багов', desc_es: 'Lanza a 30 bichos', desc_en: 'Throw at 30 bugs', progress: 30 } } 
         }
     },
     'hp-bubble-mubble': {
         title: 'Бабл Мабл',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 25 звезд', desc_es: 'Recoge 25 estrellas', progress: 25 } }, 
-            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 25 бабочек', desc_es: 'Recoge 25 mariposas', progress: 25 } }, 
-            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 25 конфет', desc_es: 'Recoge 25 caramelos', progress: 25 } }, 
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 25 жемчужин', desc_es: 'Recoge 25 perlas', progress: 25 } }, 
-            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 25 единиц мусора', desc_es: 'Recoge 25 unidades de basura', progress: 25 } }, 
-            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 25 монет', desc_es: 'Recoge 25 monedas', progress: 25 } } 
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 25 звезд', desc_es: 'Recoge 25 estrellas', desc_en: 'Collect 25 stars', progress: 25 } }, 
+            'Animals': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 25 бабочек', desc_es: 'Recoge 25 mariposas', desc_en: 'Collect 25 butterflies', progress: 25 } }, 
+            'Toys': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 25 конфет', desc_es: 'Recoge 25 caramelos', desc_en: 'Collect 25 candies', progress: 25 } }, 
+            'Underwater': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 25 жемчужин', desc_es: 'Recoge 25 perlas', desc_en: 'Collect 25 pearls', progress: 25 } }, 
+            'City': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 25 единиц мусора', desc_es: 'Recoge 25 unidades de basura', desc_en: 'Collect 25 pieces of trash', progress: 25 } }, 
+            'Voxels': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Прыгни на 10 багов', desc_es: 'Salta sobre 10 bichos', desc_en: 'Jump on 10 bugs', progress: 10 } } 
         }
     },
      'hp-boxgame': {
         title: 'Кубики',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 спутников', desc_es: 'Recoge 15 satélites', progress: 15 } }, 
-            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Recoge 15 figuras correctas', progress: 15 } }, 
-            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Recoge 15 figuras correctas', progress: 15 } }, 
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 ракушек', desc_es: 'Recoge 15 conchas', progress: 15 } }, 
-            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Recoge 15 figuras correctas', progress: 15 } }, 
-            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 18 фигур', desc_es: 'Recoge 18 figuras', progress: 18 } } 
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 спутников', desc_es: 'Recoge 15 satélites', desc_en: 'Collect 15 satellites', progress: 15 } }, 
+            'Animals': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Recoge 15 figuras correctas', desc_en: 'Collect 15 correct figures', progress: 15 } }, 
+            'Toys': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Recoge 15 figuras correctas', desc_en: 'Collect 15 correct figures', progress: 15 } }, 
+            'Underwater': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 ракушек', desc_es: 'Recoge 15 conchas', desc_en: 'Collect 15 shells', progress: 15 } }, 
+            'City': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 правильных фигур', desc_es: 'Recoge 15 figuras correctas', desc_en: 'Collect 15 correct figures', progress: 15 } }, 
+            'Voxels': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Пройди 10 препятствий', desc_es: 'Supera 10 obstáculos', desc_en: 'Pass 10 obstacles', progress: 10 } } 
         }
     },
     'hp-flashlights': {
         title: 'Фонари',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
-            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
-            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
-            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } }, 
-            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', progress: 20 } } 
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', desc_en: 'Bring 20 needed items', progress: 20 } }, 
+            'Animals': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', desc_en: 'Bring 20 needed items', progress: 20 } }, 
+            'Toys': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', desc_en: 'Bring 20 needed items', progress: 20 } }, 
+            'Underwater': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', desc_en: 'Bring 20 needed items', progress: 20 } }, 
+            'City': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Принеси 20 нужных предметов', desc_es: 'Trae 20 objetos necesarios', desc_en: 'Bring 20 needed items', progress: 20 } }, 
+            'Voxels': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Разреж 40 багов', desc_es: 'Corta 40 bichos', desc_en: 'Cut 40 bugs', progress: 40 } } 
         }
     },
     'hp-living-figures': {
         title: 'Ожившие фигуры',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', progress: 15 } }, 
-            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', progress: 15 } }, 
-            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', progress: 15 } }, 
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', progress: 15 } }, 
-            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', progress: 15 } }, 
-            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', progress: 15 } } 
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', desc_en: 'Collect 15 figures', progress: 15 } }, 
+            'Animals': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', desc_en: 'Collect 15 figures', progress: 15 } }, 
+            'Toys': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', desc_en: 'Collect 15 figures', progress: 15 } }, 
+            'Underwater': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', desc_en: 'Collect 15 figures', progress: 15 } }, 
+            'City': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', desc_en: 'Collect 15 figures', progress: 15 } }, 
+            'Voxels': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', desc_en: 'Collect 15 figures', progress: 15 } } 
         }
     },
     'hp-living-pictures': {
         title: 'Ожившие рисунки',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Отправь 15 рисунков', desc_es: 'Envía 15 dibujos', progress: 15 } }, 
-            'Animals': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Создай 15 животных', desc_es: 'Crea 15 animales', progress: 15 } }, 
-            'Toys': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Создай 15 игрушек', desc_es: 'Crea 15 juguetes', progress: 15 } }, 
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Создай 15 морских обитателей', desc_es: 'Crea 15 criaturas marinas', progress: 15 } }, 
-            'City': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Создай 15 объектов', desc_es: 'Crea 15 objetos', progress: 15 } }, 
-            'Voxels': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Создай 15 фигур', desc_es: 'Crea 15 figuras', progress: 15 } } 
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Отправь 15 рисунков', desc_es: 'Envía 15 dibujos', desc_en: 'Send 15 drawings', progress: 15 } }, 
+            'Animals': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Создай 15 животных', desc_es: 'Crea 15 animales', desc_en: 'Create 15 animals', progress: 15 } }, 
+            'Toys': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Создай 15 игрушек', desc_es: 'Crea 15 juguetes', desc_en: 'Create 15 toys', progress: 15 } }, 
+            'Underwater': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Создай 15 морских обитателей', desc_es: 'Crea 15 criaturas marinas', desc_en: 'Create 15 sea creatures', progress: 15 } }, 
+            'City': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Создай 15 объектов', desc_es: 'Crea 15 objetos', desc_en: 'Create 15 objects', progress: 15 } }, 
+            'Voxels': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Раскрась и запусти 10 рисунков', desc_es: 'Colorea y lanza 10 dibujos', desc_en: 'Color and launch 10 drawings', progress: 10 } } 
         }
     },
     'hp-painter': {
         title: 'Художник',
         achievements: { 
-            'Space2.0':   { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Нарисуй 5 ракет', desc_es: 'Dibuja 5 cohetes', progress: 5 } }, 
-            'Animals':    { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Нарисуй 5 животных', desc_es: 'Dibuja 5 animales', progress: 5 } }, 
-            'Toys':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Нарисуй 5 игрушек', desc_es: 'Dibuja 5 juguetes', progress: 5 } }, 
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Нарисуй 5 рыб', desc_es: 'Dibuja 5 peces', progress: 5 } }, 
-            'City':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Нарисуй 5 машин', desc_es: 'Dibuja 5 coches', progress: 5 } }, 
-            'Voxels':     { 'TimeSpent': { desc_ru: '[Заглушка] Поиграй в игру одну минуту', desc_es: '[Marcador] Juega el juego por un minuto' }, 'GameWin': { desc_ru: '[Заглушка] Выиграй игру', desc_es: '[Marcador] Gana el juego' }, 'GameAction': { desc_ru: '[Заглушка] Нарисуй 5 объектов', desc_es: '[Marcador] Dibuja 5 objetos', progress: 5 } } 
+            'Space2.0':   { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Нарисуй 5 ракет', desc_es: 'Dibuja 5 cohetes', desc_en: 'Draw 5 rockets', progress: 5 } }, 
+            'Animals':    { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Нарисуй 5 животных', desc_es: 'Dibuja 5 animales', desc_en: 'Draw 5 animals', progress: 5 } }, 
+            'Toys':       { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Нарисуй 5 игрушек', desc_es: 'Dibuja 5 juguetes', desc_en: 'Draw 5 toys', progress: 5 } }, 
+            'Underwater': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Нарисуй 5 рыб', desc_es: 'Dibuja 5 peces', desc_en: 'Draw 5 fish', progress: 5 } }, 
+            'City':       { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Нарисуй 5 машин', desc_es: 'Dibuja 5 coches', desc_en: 'Draw 5 cars', progress: 5 } }, 
+            'Voxels':     { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Лопни кистью 30 багов', desc_es: 'Explota 30 bichos con un pincel', desc_en: 'Pop 30 bugs with a brush', progress: 30 } } 
         }
     },
     'hp-magnets': {
         title: 'Магниты',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 15 спутников', desc_es: 'Recoge 15 satélites', progress: 15 } },
-            'Voxels':   { 'TimeSpent': { desc_ru: '[Заглушка] Поиграй в игру одну минуту', desc_es: '[Marcador] Juega el juego por un minuto' }, 'GameWin': { desc_ru: '[Заглушка] Выиграй игру', desc_es: '[Marcador] Gana el juego' }, 'GameAction': { desc_ru: '[Заглушка] Собери 15 фигур', desc_es: '[Marcador] Recoge 15 figuras', progress: 15 } }
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 спутников', desc_es: 'Recoge 15 satélites', desc_en: 'Collect 15 satellites', progress: 15 } },
+            'Voxels':   { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 15 фигур', desc_es: 'Recoge 15 figuras', desc_en: 'Collect 15 figures', progress: 15 } }
         }
     },
     'hp-trampoline': {
         title: 'Батут',
         achievements: { 
-            'Space2.0': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 30 звезд', desc_es: 'Recoge 30 estrellas', progress: 30 } },
-            'Animals':  { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 30 бабочек', desc_es: 'Recoge 30 mariposas', progress: 30 } },
-            'Voxels':   { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameWin': { desc_ru: 'Выиграй игру', desc_es: 'Gana el juego' }, 'GameAction': { desc_ru: 'Собери 30 предметов', desc_es: 'Recoge 30 objetos', progress: 30 } }
+            'Space2.0': { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 30 звезд', desc_es: 'Recoge 30 estrellas', desc_en: 'Collect 30 stars', progress: 30 } },
+            'Animals':  { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 30 бабочек', desc_es: 'Recoge 30 mariposas', desc_en: 'Collect 30 butterflies', progress: 30 } },
+            'Voxels':   { 'TimeSpent': {}, 'GameWin': {}, 'GameAction': { desc_ru: 'Собери 30 предметов', desc_es: 'Recoge 30 objetos', desc_en: 'Collect 30 items', progress: 30 } }
         }
     },
     'hp-climbwall': {
         title: 'Скалодром',
         achievements: { 
-            'Space2.0':   { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameAction': { desc_ru: 'Собери 25 звезд', desc_es: 'Recoge 25 estrellas', progress: 25 } },
-            'Animals':    { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameAction': { desc_ru: 'Собери 25 бабочек', desc_es: 'Recoge 25 mariposas', progress: 25 } },
-            'Toys':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameAction': { desc_ru: 'Собери 25 игрушек', desc_es: 'Recoge 25 juguetes', progress: 25 } },
-            'Underwater': { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameAction': { desc_ru: 'Собери 25 рыб', desc_es: 'Recoge 25 peces', progress: 25 } },
-            'City':       { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameAction': { desc_ru: 'Собери 25 машин', desc_es: 'Recoge 25 coches', progress: 25 } },
-            'Voxels':     { 'TimeSpent': { desc_ru: 'Поиграй в игру одну минуту', desc_es: 'Juega el juego por un minuto' }, 'GameAction': { desc_ru: 'Собери 25 предметов', desc_es: 'Recoge 25 objetos', progress: 25 } }
+            'Space2.0':   { 'TimeSpent': {}, 'GameAction': { desc_ru: 'Собери 25 звезд', desc_es: 'Recoge 25 estrellas', desc_en: 'Collect 25 stars', progress: 25 } },
+            'Animals':    { 'TimeSpent': {}, 'GameAction': { desc_ru: 'Собери 25 бабочек', desc_es: 'Recoge 25 mariposas', desc_en: 'Collect 25 butterflies', progress: 25 } },
+            'Toys':       { 'TimeSpent': {}, 'GameAction': { desc_ru: 'Собери 25 игрушек', desc_es: 'Recoge 25 juguetes', desc_en: 'Collect 25 toys', progress: 25 } },
+            'Underwater': { 'TimeSpent': {}, 'GameAction': { desc_ru: 'Собери 25 рыб', desc_es: 'Recoge 25 peces', desc_en: 'Collect 25 fish', progress: 25 } },
+            'City':       { 'TimeSpent': {}, 'GameAction': { desc_ru: 'Собери 25 машин', desc_es: 'Recoge 25 coches', desc_en: 'Collect 25 cars', progress: 25 } },
+            'Voxels':     { 'TimeSpent': {}, 'GameAction': { desc_ru: 'Собери 25 предметов', desc_es: 'Recoge 25 objetos', desc_en: 'Collect 25 items', progress: 25 } }
         }
     }
 };
 
+// --- Standard Descriptions ---
+const standardDescriptions = {
+    TimeSpent: { desc_ru: "Поиграй в игру одну минуту", desc_es: "Juega el juego por un minuto", desc_en: "Play the game for one minute" },
+    GameWin: { desc_ru: "Выиграй игру", desc_es: "Gana el juego", desc_en: "Win the game" }
+};
+
+// --- Inject Standard Descriptions ---
+for (const game of Object.values(achievementData)) {
+    for (const theme of Object.values(game.achievements)) {
+        if (theme.TimeSpent) {
+            Object.assign(theme.TimeSpent, standardDescriptions.TimeSpent);
+        }
+        if (theme.GameWin) {
+            Object.assign(theme.GameWin, standardDescriptions.GameWin);
+        }
+    }
+}
+
+
 // --- UTILITY to generate titles ---
-function generateEnglishTitle(zone_name) {
+function generateTranslatedTitle(zone_name) {
     if (zone_name === 'hp-kidalki') return 'Ballstrike';
     return zone_name
         .replace('hp-', '')
@@ -268,9 +288,11 @@ function generateEnglishTitle(zone_name) {
         .join(' ');
 }
 
-// Add English titles to the database
+// Add translated titles to the database
 for(const zone_name in achievementData) {
-    achievementData[zone_name].title_es = generateEnglishTitle(zone_name);
+    const translatedTitle = generateTranslatedTitle(zone_name);
+    achievementData[zone_name].title_es = translatedTitle;
+    achievementData[zone_name].title_en = translatedTitle;
 }
 
 // --- CONSTANTS ---
@@ -467,6 +489,9 @@ function generateTable() {
                 if (selectedLang === 'es') {
                     title = gameData.title_es || gameData.title;
                     desc = achievementDetails.desc_es || achievementDetails.desc_ru;
+                } else if (selectedLang === 'en') {
+                    title = gameData.title_en || gameData.title;
+                    desc = achievementDetails.desc_en || achievementDetails.desc_ru;
                 }
                 
                 desc = desc || 'Описание не найдено';
